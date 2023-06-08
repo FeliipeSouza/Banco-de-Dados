@@ -20,7 +20,7 @@ public class ConexaoBanco {
 public Connection conexao() {
 	String url = "jdbc:postgresql://localhost:5432/cadastro";
 	String usu = "postgres";
-	String senh = "458tubyh";
+	String senh = "suasenha";
 	try {
 		Connection connect = DriverManager.getConnection(url,usu,senh);
 		if(connect!=null) {
