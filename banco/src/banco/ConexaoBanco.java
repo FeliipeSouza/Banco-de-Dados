@@ -10,12 +10,15 @@ public class ConexaoBanco {
 	private Connection connection;
 	private ResultSet resultset;
 	
-	public static void main(String[] args) {
-		ConexaoBanco bank = new ConexaoBanco();
-		bank.conexao();	
-		bank.inserirAlun();
+	public Connection getConnection() {
+		return connection;
 	}
 	
+	 public void setConnection(Connection connection) {
+	this.connection = connection;
+	}	
+	
+			
 	
 public Connection conexao() {
 	String url = "jdbc:postgresql://localhost:5432/cadastro";
@@ -38,38 +41,33 @@ public Connection conexao() {
 
 public void ConsultTabAlun() {
 	try {
-		//Da pra fazer assim tbm:
-		//Statement stm = connect.createStatement
-	//	Resultset rst = stm.executeQuery("");
-		
 	ResultSet rst = connection.createStatement().executeQuery("SELECT * FROM aluno");
-	if(rst.next() != false) {
-		while(rst.next()) {
-			System.out.println("Nome do aluno: " + rst.getString("nome_aluno"));
-			System.out.println("CPF: " + rst.getString("cpf_aluno"));
-			System.out.println("RG: " + rst.getString("rg_aluno"));
-			System.out.println("Nome do Pai: " + rst.getString("nomePai_aluno"));
-			System.out.println("Nome da Mae: " + rst.getString("nomeMae_aluno"));
-			System.out.println("Matricula: " + rst.getString("matricula"));
-
-		}}else {
-			System.out.println("Sua tabela esta vazia");
-		} 
+	if(!rst.next()) {
+		System.out.println("Sua tabela esta vazia");}
+	else {
+		do {
+		System.out.println();
+		System.out.println("Nome do aluno: " + rst.getString("nome_aluno"));
+		System.out.println("CPF: " + rst.getString("cpf_aluno"));
+		System.out.println("RG: " + rst.getString("rg_aluno"));
+		System.out.println("Nome do Pai: " + rst.getString("nomePai_aluno"));
+		System.out.println("Nome da Mae: " + rst.getString("nomeMae_aluno"));
+		System.out.println("Matricula: " + rst.getString("matricula"));
+} while(rst.next()); }
 	} catch (SQLException e) {
 		System.out.println("Erro ao consultar");
 	}
 }
+
 public void ConsultTabCrs() {
 	try {
-		//Da pra fazer assim tbm:
-		//Statement stm = connect.createStatement
-	//	Resultset rst = stm.executeQuery("");
 		
 	ResultSet rst = connection.createStatement().executeQuery("SELECT * FROM curso");
-	if (rst.next() == false) {
+	if (!rst.next()) {
 	    System.out.println("Sua tabela está vazia");}
 	else {
 	do {
+	System.out.println();
 	System.out.println("Codigo do curso: " + rst.getString("cod_curso"));
 	System.out.println("CPF do aluno inscrito: " + rst.getString("cpf_aluno"));
 	System.out.println("Nome do curso: " + rst.getString("nome_curso"));
@@ -108,13 +106,7 @@ public void inserirAlun() {
 		
 	} catch (SQLException e) {
 		e.printStackTrace();
-	}/*if(connection!=null) {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
+	}
 }
 
 public void inserirCurs() {
@@ -139,18 +131,12 @@ public void inserirCurs() {
 	} catch (SQLException e) {
 		
 		e.printStackTrace();
-	}/*if(connection!=null) {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
+	}
 }
 
 
 public void atualizarAlun() {
-	//colocar nas interrogaçoes scanners, perguntando qual preco e o id
+	
 	String cp,n;
 	Scanner scn = new Scanner(System.in);
 	System.out.println("Digite um novo nome para o aluno");
@@ -158,17 +144,11 @@ public void atualizarAlun() {
 	System.out.println("Digite digite o cpf desse aluno");
 	cp = scn.nextLine();
 	
-	String sql = "UPDATE aluno SET nome_aluno = '"+n+"' WHERE id_produto='"+cp+"'";
+	String sql = "UPDATE aluno SET nome_aluno = '"+n+"' WHERE cpf_aluno='"+cp+"'";
 	try {
 		ResultSet rst = connection.createStatement().executeQuery(sql);
 	} catch (Exception e) {
-	}/*if(connection!=null) {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
+	}
 }
 
 public void atualizarCurs() {
@@ -182,33 +162,23 @@ public void atualizarCurs() {
 	try {
 		ResultSet rst = connection.createStatement().executeQuery(sql);
 	} catch (Exception e) {
-	}/*if(connection!=null) {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
+	}
 }
 
 
 public void removerAlun() {
 	String cp;
 	Scanner scn = new Scanner(System.in);
-	System.out.println("Digite digite o CPF do aluno que voce quer excluir");
-	cp = scn.nextLine();
-	String sql = "DELETE FROM aluno WHERE cpf_aluno='"+cp+"'";
+	
 	try {
+		System.out.println("Digite digite o CPF do aluno que voce quer excluir");
+		cp = scn.nextLine();
+		String sql = "DELETE FROM aluno WHERE cpf_aluno='"+cp+"'";
 		ResultSet rst = connection.createStatement().executeQuery(sql);
 	} catch (Exception e) {
 		e.printStackTrace();
-	}/*if(connection!=null) {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
+	
+	}
 }
 
 public void removerCurs() {
@@ -221,13 +191,7 @@ public void removerCurs() {
 		ResultSet rst = connection.createStatement().executeQuery(sql);
 	} catch (Exception e) {
 		e.printStackTrace();
-	}/*if(connection!=null) {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
+	}
 }
 
 public void innerJoin() {
@@ -235,54 +199,40 @@ public void innerJoin() {
 			+ "INNER JOIN aluno al ON al.cpf_aluno = cs.cpf_aluno";
 	try {
 		ResultSet rst = connection.createStatement().executeQuery(sql);
-		
-		while(rst.next()) {
+		if(!rst.next()) {
+			System.out.println("Uma ou ambas as tabelas nao possui elementos");}
+		else {
+		do {
 			System.out.println();
-			System.out.println("Nome aluno: " + rst.getString("nome_aluno"));
-			System.out.println("CPF: " + rst.getString("cpf_aluno"));
-			System.out.println("Nome do curso: " + rst.getString("nome_curso"));		
-			System.out.println("Modalidade: " + rst.getString("modalidade_curso"));
-			
-				}
+		System.out.println("Nome aluno: " + rst.getString("nome_aluno"));
+		System.out.println("CPF: " + rst.getString("cpf_aluno"));
+		System.out.println("Nome do curso: " + rst.getString("nome_curso"));		
+		System.out.println("Modalidade: " + rst.getString("modalidade_curso"));
+		}
+		while(rst.next());
+		}
 	} catch (Exception e) {
 		e.printStackTrace();
-	}/*if(connection!=null) {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
+	}
 }
 
 public void fecharConexao() {
+	
 	if(connection!=null) {
 		try {
 			connection.close();
 		} catch (Exception e) {
-			e.printStackTrace();		}
+			e.printStackTrace();
+		}
 	}
 }
-
-
-public Connection getConnection() {
-	return connection;
-}
-public ResultSet getResultset() {
-	return resultset;
-}
-public void setResultset(ResultSet resultset) {
-	this.resultset = resultset;
 }
 
-public void setConnection(Connection connection) {
-this.connection = connection;
-}	
-}
-		
+
+
 		
 	
-
+	
 	
 
 

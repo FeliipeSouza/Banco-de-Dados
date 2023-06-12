@@ -10,14 +10,14 @@ public class Menu {
 		String e;
 		
 		System.out.println("Bem-vindos ao nosso Projeto: Brigadeiro com Cafe");
-		System.out.println("Vamos comecar...");
+		System.out.println("Vamos tentar conectar com o nosso banco");
 		System.out.println();
 		bank.conexao();
 		
 		
 		do {
 			System.out.println();
-			System.out.println("Agora escolha uma opcao: \n"
+			System.out.print("Agora escolha uma opcao: \n"
 				+ "[C] - Consultar tabela \n"
 				+ "[I] - Inserir na tabela \n"
 				+ "[U] - Atualizar registros \n"
