@@ -19,7 +19,7 @@ public class ConexaoBanco {
 	}	
 	
 			
-	
+//ESTABELECENDO A CONEXAO COM O BANCO	
 public Connection conexao() {
 	String url = "jdbc:postgresql://localhost:5432/cadastro";
 	String usu = "postgres";
@@ -39,8 +39,10 @@ public Connection conexao() {
 	return null; 
 }
 
+//CRIANDO METODO CONSULTA ALUNO , PARA MOSTRAR OS REGISTROS DA TABELA aluno
 public void ConsultTabAlun() {
 	try {
+		
 	ResultSet rst = connection.createStatement().executeQuery("SELECT * FROM aluno");
 	if(!rst.next()) {
 		System.out.println("Sua tabela esta vazia");}
@@ -58,7 +60,7 @@ public void ConsultTabAlun() {
 		System.out.println("Erro ao consultar");
 	}
 }
-
+//CRIANDO METODO CONSULTA CURSO , PARA MOSTRAR OS REGISTROS DA TABELA curso
 public void ConsultTabCrs() {
 	try {
 		
@@ -82,7 +84,8 @@ public void ConsultTabCrs() {
 	}
 
 }
-
+ 
+//CRIANDO METODO INSERIR ALUNO , PARA INSERIR REGISTROS NA TABELA aluno
 public void inserirAlun() {
 	String n,c,r,np,nm,m;
 	Scanner scn = new Scanner(System.in);
@@ -109,6 +112,7 @@ public void inserirAlun() {
 	}
 }
 
+//CRIANDO METODO INSERIR CURSO , PARA INSERIR REGISTROS NA TABELA curso
 public void inserirCurs() {
 	String c,cp,n,t,m;
 	Scanner scn = new Scanner(System.in);
@@ -134,7 +138,7 @@ public void inserirCurs() {
 	}
 }
 
-
+//CRIANDO METODO ATUALIZAR ALUNO , PARA ATUALIZAR ALGUNS REGISTROS NA TABELA aluno
 public void atualizarAlun() {
 	
 	String cp,n;
@@ -150,7 +154,8 @@ public void atualizarAlun() {
 	} catch (Exception e) {
 	}
 }
-
+ 
+//CRIANDO METODO ATUALIZAR CURSO , PARA ATUALIZAR ALGUNS REGISTROS NA TABELA curso
 public void atualizarCurs() {
 	String cod,n;
 	Scanner scn = new Scanner(System.in);
@@ -165,7 +170,7 @@ public void atualizarCurs() {
 	}
 }
 
-
+//CRIANDO METODO REMOVER ALUNO , PARA REMOVER ALGUNS REGISTROS NA TABELA aluno
 public void removerAlun() {
 	String cp;
 	Scanner scn = new Scanner(System.in);
@@ -180,7 +185,7 @@ public void removerAlun() {
 	
 	}
 }
-
+//CRIANDO METODO REMOVER CURSO , PARA REMOVER ALGUNS REGISTROS NA TABELA curso
 public void removerCurs() {
 	String cod;
 	Scanner scn = new Scanner(System.in);
@@ -193,7 +198,7 @@ public void removerCurs() {
 		e.printStackTrace();
 	}
 }
-
+//METODO INNER JOIN, PARA MOSTRAR CERTOS REGISTROS QUE ESTAO NA TABELA aluno E NA TABELA curso
 public void innerJoin() {
 	String sql = "SELECT al.nome_aluno,al.cpf_aluno,cs.nome_curso,cs.modalidade_curso FROM curso cs "
 			+ "INNER JOIN aluno al ON al.cpf_aluno = cs.cpf_aluno";
@@ -215,7 +220,7 @@ public void innerJoin() {
 		e.printStackTrace();
 	}
 }
-
+//METODO PARA FECHAR A CONEXAO
 public void fecharConexao() {
 	
 	if(connection!=null) {

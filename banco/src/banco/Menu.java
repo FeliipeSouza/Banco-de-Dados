@@ -12,9 +12,9 @@ public class Menu {
 		System.out.println("Bem-vindos ao nosso Projeto: Brigadeiro com Cafe");
 		System.out.println("Vamos tentar conectar com o nosso banco");
 		System.out.println();
-		bank.conexao();
+		bank.conexao();   //abrindo a conexao
 		
-		
+		//CRIANDO MENU
 		do {
 			System.out.println();
 			System.out.print("Agora escolha uma opcao: \n"
@@ -31,6 +31,7 @@ public class Menu {
 			esc = Character.toUpperCase(esc);
 			
 		} while (esc!='C' && esc!='I' && esc!='U' && esc!='R' && esc!='J' && esc!='S');	
+		//CRIANDO A OPCAO DE ESCOLHA DE TABELA
 		if(esc=='C' || esc=='I' || esc=='U' || esc=='R') {
 			do {
 				System.out.println("Informe qual é a tabela que voce quer: \n"
@@ -42,8 +43,9 @@ public class Menu {
 			}while(esc2!='A' && esc2!='C');
 			
 		}
-		
+		//SWITCHES
 		switch (esc) {
+		//OPCAO CONSULTA
 		case 'C': {
 			if(esc2=='A') {
 				System.out.println("Consultando tabela aluno");
@@ -52,7 +54,7 @@ public class Menu {
 			System.out.println("Consultando tabela curso");
 			bank.ConsultTabCrs();}
 		}break;
-		
+		//OPCAO INSERCAO
 		case 'I': {
 			if(esc2=='A') {
 				System.out.println("Inserindo na tabela aluno");
@@ -61,7 +63,7 @@ public class Menu {
 			System.out.println("Inserindo na tabela curso");
 			bank.inserirCurs();}
 		}break;
-		
+		//OPCAO ATUALIZAR
 		case 'U': {
 			if(esc2=='A') {
 				System.out.println("Atualizando a tabela aluno");
@@ -70,7 +72,7 @@ public class Menu {
 			System.out.println("Atualizando a tabela curso");
 			bank.atualizarCurs();}
 		}break;
-		
+		//OPCAO REMOVER
 		case 'R': {
 			if(esc2=='A') {
 				System.out.println("Removendo um registro da tabela aluno");
@@ -80,12 +82,12 @@ public class Menu {
 			bank.removerCurs();
 			}
 		}break;
-		
+		//OPCAO INNER JOIN
 		case 'J': {
 			System.out.println("Consultando Join...");
 			bank.innerJoin();
 		}break;
-		
+		//OPCAO SAIR DO SISTEMA
 		case 'S': {
 			System.out.println("Finalizando Sistema...");
 		
@@ -93,7 +95,7 @@ public class Menu {
 		
 		}
 		
-		
+		//AO SAIR , FECHO A CONEXAO DO BANCO
 		} while (esc!='S');
 		bank.fecharConexao();
 		
