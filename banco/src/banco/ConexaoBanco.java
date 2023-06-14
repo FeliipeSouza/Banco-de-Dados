@@ -1,4 +1,4 @@
-package banco;
+  package banco;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,7 +33,7 @@ public Connection conexao() {
 		}else {System.out.println("Nao conectado");
 	
 		}
-	} catch (Exception e) {
+	} catch (SQLException e) {
 		e.printStackTrace();
 	}
 	return null; 
@@ -151,7 +151,8 @@ public void atualizarAlun() {
 	String sql = "UPDATE aluno SET nome_aluno = '"+n+"' WHERE cpf_aluno='"+cp+"'";
 	try {
 		ResultSet rst = connection.createStatement().executeQuery(sql);
-	} catch (Exception e) {
+	} catch (SQLException e) {
+		e.printStackTrace();
 	}
 }
  
@@ -166,7 +167,8 @@ public void atualizarCurs() {
 	String sql = "UPDATE curso SET nome_curso = '"+n+"' WHERE cod_curso ="+cod+"";
 	try {
 		ResultSet rst = connection.createStatement().executeQuery(sql);
-	} catch (Exception e) {
+	} catch (SQLException e) {
+		e.printStackTrace();
 	}
 }
 
@@ -180,7 +182,7 @@ public void removerAlun() {
 		cp = scn.nextLine();
 		String sql = "DELETE FROM aluno WHERE cpf_aluno='"+cp+"'";
 		ResultSet rst = connection.createStatement().executeQuery(sql);
-	} catch (Exception e) {
+	} catch (SQLException e) {
 		e.printStackTrace();
 	
 	}
@@ -194,7 +196,7 @@ public void removerCurs() {
 	String sql = "DELETE FROM curso WHERE cod_curso="+cod+"";
 	try {
 		ResultSet rst = connection.createStatement().executeQuery(sql);
-	} catch (Exception e) {
+	} catch (SQLException e) {
 		e.printStackTrace();
 	}
 }
@@ -216,7 +218,7 @@ public void innerJoin() {
 		}
 		while(rst.next());
 		}
-	} catch (Exception e) {
+	} catch (SQLException e) {
 		e.printStackTrace();
 	}
 }
@@ -226,7 +228,7 @@ public void fecharConexao() {
 	if(connection!=null) {
 		try {
 			connection.close();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

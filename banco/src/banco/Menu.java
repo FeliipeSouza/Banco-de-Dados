@@ -11,7 +11,7 @@ public class Menu {
 		
 		System.out.println("Bem-vindos ao nosso Projeto: Brigadeiro com Cafe");
 		System.out.println("Vamos tentar conectar com o nosso banco");
-		System.out.println();
+		System.out.println(); 
 		bank.conexao();   //abrindo a conexao
 		
 		//CRIANDO MENU
